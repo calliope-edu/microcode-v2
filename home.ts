@@ -144,7 +144,7 @@ namespace microcode {
                 Screen.LEFT_EDGE +
                     ((Screen.WIDTH - icondb.menu_logo.width) >> 1) +
                     dy,
-                y - wordLogo.height + this.yOffset + margin
+                y - wordLogo.height + this.yOffset + margin - 6
             )
             if (!this.yOffset) {
                 const tagline = resolveTooltip("tagline")
