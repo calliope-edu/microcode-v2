@@ -4,7 +4,7 @@
     "description": "Physical computing library for micro:bit V2",
     "dependencies": {
         "core": "*",
-        "radio": "*",
+        "funk": "*",
         "microphone": "*",
         "datalogger": "*",
         "settings": "*",
@@ -43,6 +43,8 @@
         "target": "7.1.13",
         "targetId": "microbit"
     },
-    "supportedTargets": ["microbit"],
+    "supportedTargets": [
+        "microbit"
+    ],
     "preferredEditor": "tsprj"
 }
