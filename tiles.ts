@@ -213,6 +213,8 @@ namespace microcode {
         TID_COMPARE_GT = 224,
         TID_COMPARE_GTE = 225,
         TID_COMPARE_END = 225,
+        //
+        TID_FILTER_PIN_3 = 230,
 
         TID_POS_INT_EDITOR = 254,
         TID_DECIMAL_EDITOR = 255, // both filter and modifier
@@ -243,7 +245,8 @@ namespace microcode {
             (tid >= Tid.FILTER_START && tid <= Tid.FILTER_END) ||
             isMathOperator(tid) ||
             isComparisonOperator(tid) ||
-            tid == Tid.TID_DECIMAL_EDITOR
+            tid == Tid.TID_DECIMAL_EDITOR ||
+            tid == Tid.TID_FILTER_PIN_3
         )
     }
 
@@ -270,8 +273,9 @@ namespace microcode {
 
     function isPressReleaseEvent(tidEnum: Tid) {
         return (
-            Tid.PRESS_RELEASE_START <= tidEnum &&
-            tidEnum <= Tid.PRESS_RELEASE_END
+            (Tid.PRESS_RELEASE_START <= tidEnum &&
+                tidEnum <= Tid.PRESS_RELEASE_END) ||
+            tidEnum == Tid.TID_FILTER_PIN_3
         )
     }
 
@@ -490,6 +494,8 @@ namespace microcode {
                     return 4
                 case Tid.TID_FILTER_PIN_2:
                     return 5
+                case Tid.TID_FILTER_PIN_3:
+                    return 6
                 case Tid.TID_FILTER_TIMESPAN_SHORT:
                     return 10
                 case Tid.TID_FILTER_TIMESPAN_LONG:
@@ -822,6 +828,7 @@ namespace microcode {
             case Tid.TID_FILTER_PIN_0:
             case Tid.TID_FILTER_PIN_1:
             case Tid.TID_FILTER_PIN_2:
+            case Tid.TID_FILTER_PIN_3:
                 return TileKind.EventCode
 
             case Tid.TID_SENSOR_LED_LIGHT:

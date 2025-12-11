@@ -350,6 +350,7 @@ namespace docs {
             microcode.TID_FILTER_PIN_0,
             microcode.TID_FILTER_PIN_1,
             microcode.TID_FILTER_PIN_2,
+            microcode.TID_FILTER_PIN_3,
             microcode.TID_FILTER_BUTTON_A,
             microcode.TID_FILTER_BUTTON_B,
             microcode.TID_FILTER_TIMESPAN_SHORT,

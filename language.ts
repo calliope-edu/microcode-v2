@@ -417,6 +417,10 @@ namespace microcode {
                 all.push(getEditor(Tid.TID_DECIMAL_EDITOR))
                 all.push(getEditor(Tid.TID_POS_INT_EDITOR))
             }
+            // special case for PIN_3 (outside normal filter range to avoid breaking existing TIDs)
+            if (rangeName == "filters") {
+                all.push(Tid.TID_FILTER_PIN_3)
+            }
 
             all = all
                 .filter((tile: Tile) => isVisible(tile))

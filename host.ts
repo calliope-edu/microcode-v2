@@ -29,6 +29,7 @@ namespace microcode {
         100: Tid.TID_FILTER_PIN_0, // DAL.ID_PIN_P0
         101: Tid.TID_FILTER_PIN_1, // DAL.ID_PIN_P1
         102: Tid.TID_FILTER_PIN_2, // DAL.ID_PIN_P2
+        103: Tid.TID_FILTER_PIN_3, // DAL.ID_PIN_P3
     }
 
     const gestures = [
@@ -57,11 +58,12 @@ namespace microcode {
         DAL.MICROBIT_ID_LOGO,
     ]
 
-    const pins = [TouchPin.P0, TouchPin.P1, TouchPin.P2]
+    const pins = [TouchPin.P0, TouchPin.P1, TouchPin.P2, TouchPin.P3]
     const pin2tid = [
         Tid.TID_FILTER_PIN_0,
         Tid.TID_FILTER_PIN_1,
         Tid.TID_FILTER_PIN_2,
+        Tid.TID_FILTER_PIN_3,
     ]
 
     export class MicrobitHost implements RuntimeHost {

@@ -83,6 +83,7 @@
     "T70": "touch pin 0",
     "T71": "touch pin 1",
     "T72": "touch pin 2",
+    "T230": "touch pin 3",
     "T73": "button A",
     "T74": "button B",
     "T75": "key 1",

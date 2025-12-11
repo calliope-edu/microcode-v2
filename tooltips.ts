@@ -66,6 +66,7 @@ namespace microcode {
         else if (id === "T70") res = "touch pin 0";
         else if (id === "T71") res = "touch pin 1";
         else if (id === "T72") res = "touch pin 2";
+        else if (id === "T230") res = "touch pin 3";
         else if (id === "T73") res = "button A";
         else if (id === "T74") res = "button B";
         else if (id === "T75") res = "key 1";
