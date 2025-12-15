@@ -240,8 +240,8 @@ namespace microcode {
             // micro:bit car
             // const car = carImages(name)
             // if (car) return car
-            // const jacdac = jacdacImages(name)
-            // if (jacdac) return jacdac
+            const jacdac = jacdacImages(name)
+            if (jacdac) return jacdac
             extraImage = null
             extraSamples(name) // only for web app
             if (extraImage) return extraImage

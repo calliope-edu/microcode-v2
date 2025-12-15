@@ -68,6 +68,9 @@ namespace microcode {
 
     export class MicrobitHost implements RuntimeHost {
         private sensors: Sensor[] = []
+        private neoPixelStrip: neopixel.Strip = null
+        private readonly NEOPIXEL_PIN = DigitalPin.RGB
+        private readonly NEOPIXEL_COUNT = 3
 
         constructor() {
             this._handler = (s: number, f: number) => {}
@@ -195,6 +198,10 @@ namespace microcode {
             music.stopAllSounds()
             led.stopAnimation()
             basic.clearScreen()
+            if (this.neoPixelStrip) {
+                this.neoPixelStrip.clear()
+                this.neoPixelStrip.show()
+            }
         }
 
         public execute(action: ActionTid, param: any) {
@@ -226,6 +233,9 @@ namespace microcode {
                         music.stringPlayable(param, 120),
                         music.PlaybackMode.UntilDone
                     )
+                    return
+                case Tid.TID_ACTUATOR_RGB_LED:
+                    this.executeRgbLed(param)
                     return
             }
         }
@@ -266,6 +276,65 @@ namespace microcode {
                     return soundExpression.yawn
             }
             return soundExpression.giggle
+        }
+
+        private executeRgbLed(param: any) {
+            // Initialize strip on first use
+            if (!this.neoPixelStrip) {
+                this.neoPixelStrip = neopixel.create(
+                    this.NEOPIXEL_PIN,
+                    this.NEOPIXEL_COUNT,
+                    NeoPixelMode.RGB  // Standard RGB (GRB wire order)
+                )
+                this.neoPixelStrip.setBrightness(25)
+            }
+
+            if (param == Tid.TID_MODIFIER_RGB_LED_COLOR_RAINBOW) {
+                // Rainbow animation cycling through colors
+                for (let hue = 0; hue < 360; hue += 10) {
+                    for (let i = 0; i < this.NEOPIXEL_COUNT; i++) {
+                        const pixelHue = (hue + (i * 120)) % 360
+                        this.neoPixelStrip.setPixelColor(i, neopixel.hsl(pixelHue, 100, 50))
+                    }
+                    this.neoPixelStrip.show()
+                    basic.pause(50)
+                }
+            } else if (param == Tid.TID_MODIFIER_RGB_LED_COLOR_SPARKLE) {
+                // Sparkle animation
+                for (let i = 0; i < 10; i++) {
+                    this.neoPixelStrip.clear()
+                    const randomPixel = Math.randomRange(0, this.NEOPIXEL_COUNT - 1)
+                    this.neoPixelStrip.setPixelColor(randomPixel, neopixel.colors(NeoPixelColors.White))
+                    this.neoPixelStrip.show()
+                    basic.pause(60)
+                }
+                this.neoPixelStrip.clear()
+                this.neoPixelStrip.show()
+            } else {
+                const color = this.getRgbColor(param)
+                this.neoPixelStrip.showColor(color)
+                this.neoPixelStrip.show()
+                basic.pause(400)
+            }
+        }
+
+        private getRgbColor(tid: Tid): number {
+            switch (tid) {
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_1:
+                    return neopixel.colors(NeoPixelColors.Red)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_2:
+                    return neopixel.colors(NeoPixelColors.Green)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_3:
+                    return neopixel.colors(NeoPixelColors.Blue)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_4:
+                    return neopixel.colors(NeoPixelColors.Purple)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_5:
+                    return neopixel.colors(NeoPixelColors.Yellow)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_6:
+                    return neopixel.colors(NeoPixelColors.Black)
+                default:
+                    return 0
+            }
         }
     }
 

@@ -17,6 +17,7 @@ namespace microcode {
         Speaker,
         RadioGroup, // well radio group affects subsequent radio.send
         PageCounter,
+        RgbLed,
     }
 
     function getOutputResource(action: Tid) {
@@ -35,6 +36,8 @@ namespace microcode {
                 return OutputResource.Speaker
             case Tid.TID_ACTUATOR_SWITCH_PAGE:
                 return OutputResource.PageCounter
+            case Tid.TID_ACTUATOR_RGB_LED:
+                return OutputResource.RgbLed
         }
         return undefined
     }
@@ -83,7 +86,9 @@ namespace microcode {
                 return
             this.reset()
             const time = this.getWakeTime()
-            if (!timer || time > 0) this.timerOrSequenceRule()
+            if (!timer || time > 0) {
+                this.timerOrSequenceRule()
+            }
         }
 
         private reset() {
@@ -321,6 +326,11 @@ namespace microcode {
                         param = this.rule.modifiers[this.modifierIndex]
                         break
                     }
+                    case Tid.TID_ACTUATOR_RGB_LED: {
+                        const mod = this.rule.modifiers[this.modifierIndex]
+                        param = getTid(mod)
+                        break
+                    }
                     default:
                         param = this.getParamInstant()
                 }
@@ -383,6 +393,7 @@ namespace microcode {
         | Tid.TID_ACTUATOR_MUSIC
         | Tid.TID_ACTUATOR_RADIO_SEND
         | Tid.TID_ACTUATOR_RADIO_SET_GROUP
+        | Tid.TID_ACTUATOR_RGB_LED
 
     export interface RuntimeHost {
         emitClearScreen(): void
@@ -610,7 +621,10 @@ namespace microcode {
             takesTime.forEach(rc => {
                 const whenSensor =
                     rc.rule.sensor &&
-                    getKindTid(rc.rule.sensor) == TileKind.Sensor
+                    (getKindTid(rc.rule.sensor) == TileKind.Sensor ||
+                     rc.rule.sensor == Tid.TID_SENSOR_PRESS ||
+                     rc.rule.sensor == Tid.TID_SENSOR_RELEASE ||
+                     rc.rule.sensor == Tid.TID_SENSOR_ACCELEROMETER)
                 if (!whenSensor) rc.kill()
                 rc.start()
             })

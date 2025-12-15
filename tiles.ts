@@ -1002,8 +1002,9 @@ namespace microcode {
                 return jacs.ServiceClass.LightLevel
             case Tid.TID_SENSOR_ROTARY:
                 return jacs.ServiceClass.RotaryEncoder
-            case Tid.TID_ACTUATOR_RGB_LED:
-                return jacs.ServiceClass.Led
+            // RGB_LED is now built-in, not Jacdac
+            // case Tid.TID_ACTUATOR_RGB_LED:
+            //     return jacs.ServiceClass.Led
             case Tid.TID_ACTUATOR_SERVO_SET_ANGLE:
             case Tid.TID_ACTUATOR_SERVO_POWER:
                 return jacs.ServiceClass.Servo
