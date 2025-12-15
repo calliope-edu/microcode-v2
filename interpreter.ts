@@ -64,6 +64,14 @@ namespace microcode {
         return ActionKind.Instant
     }
 
+    // Check if a sensor TID can trigger takesTime rules
+    function isValidEventSensor(sensor: Tid): boolean {
+        return getKindTid(sensor) == TileKind.Sensor ||
+               sensor == Tid.TID_SENSOR_PRESS ||
+               sensor == Tid.TID_SENSOR_RELEASE ||
+               sensor == Tid.TID_SENSOR_ACCELEROMETER
+    }
+
     class RuleClosure {
         private backgroundActive = false
         private wakeTime: number = 0
@@ -623,13 +631,8 @@ namespace microcode {
             )
 
             takesTime.forEach(rc => {
-                const whenSensor =
-                    rc.rule.sensor &&
-                    (getKindTid(rc.rule.sensor) == TileKind.Sensor ||
-                     rc.rule.sensor == Tid.TID_SENSOR_PRESS ||
-                     rc.rule.sensor == Tid.TID_SENSOR_RELEASE ||
-                     rc.rule.sensor == Tid.TID_SENSOR_ACCELEROMETER)
-                if (!whenSensor) rc.kill()
+                if (!rc.rule.sensor || !isValidEventSensor(rc.rule.sensor))
+                    rc.kill()
                 rc.start()
             })
         }

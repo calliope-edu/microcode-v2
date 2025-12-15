@@ -290,14 +290,18 @@ namespace microcode {
             }
 
             if (param == Tid.TID_MODIFIER_RGB_LED_COLOR_RAINBOW) {
-                // Rainbow animation cycling through colors
-                for (let hue = 0; hue < 360; hue += 10) {
+                // Rainbow animation - 1 full cycle, 30 frames @ 40ms = 1.2s total
+                const HUE_STEP = 12  // 360/30 = 12 degrees per frame
+                const OFFSET_PER_LED = 120  // 3 LEDs = 360/3 = 120 degree spacing
+                for (let hue = 0; hue < 360; hue += HUE_STEP) {
                     for (let i = 0; i < this.NEOPIXEL_COUNT; i++) {
-                        const pixelHue = (hue + (i * 120)) % 360
-                        this.neoPixelStrip.setPixelColor(i, neopixel.hsl(pixelHue, 100, 50))
+                        this.neoPixelStrip.setPixelColor(
+                            i, 
+                            neopixel.hsl((hue + i * OFFSET_PER_LED) % 360, 100, 50)
+                        )
                     }
                     this.neoPixelStrip.show()
-                    basic.pause(50)
+                    basic.pause(40)
                 }
             } else if (param == Tid.TID_MODIFIER_RGB_LED_COLOR_SPARKLE) {
                 // Sparkle animation
