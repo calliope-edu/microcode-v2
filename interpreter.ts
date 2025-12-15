@@ -18,6 +18,7 @@ namespace microcode {
         RadioGroup, // well radio group affects subsequent radio.send
         PageCounter,
         RgbLed,
+        RgbLedJacdac,
     }
 
     function getOutputResource(action: Tid) {
@@ -38,6 +39,8 @@ namespace microcode {
                 return OutputResource.PageCounter
             case Tid.TID_ACTUATOR_RGB_LED:
                 return OutputResource.RgbLed
+            case Tid.TID_ACTUATOR_RGB_LED_JACDAC:
+                return OutputResource.RgbLedJacdac
         }
         return undefined
     }
@@ -54,6 +57,7 @@ namespace microcode {
             case Tid.TID_ACTUATOR_SHOW_NUMBER:
             case Tid.TID_ACTUATOR_SPEAKER:
             case Tid.TID_ACTUATOR_RGB_LED:
+            case Tid.TID_ACTUATOR_RGB_LED_JACDAC:
             case Tid.TID_ACTUATOR_CAR:
                 return ActionKind.TakesTime
         }

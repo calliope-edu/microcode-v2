@@ -44,6 +44,7 @@ namespace microcode {
         TID_ACTUATOR_RADIO_SEND = 45,
         TID_ACTUATOR_RADIO_SET_GROUP = 46,
         TID_ACTUATOR_RGB_LED = 47,
+        TID_ACTUATOR_RGB_LED_JACDAC = 51,
         TID_ACTUATOR_CUP_X_ASSIGN = 48,
         TID_ACTUATOR_CUP_Y_ASSIGN = 49,
 
@@ -437,6 +438,7 @@ namespace microcode {
             case Tid.TID_ACTUATOR_CAR:
                 return Tid.TID_MODIFIER_CAR_STOP
             case Tid.TID_ACTUATOR_RGB_LED:
+            case Tid.TID_ACTUATOR_RGB_LED_JACDAC:
                 return Tid.TID_MODIFIER_RGB_LED_COLOR_RAINBOW
             case Tid.TID_ACTUATOR_PAINT: {
                 const mod = getEditor(Tid.TID_MODIFIER_ICON_EDITOR)
@@ -1002,9 +1004,10 @@ namespace microcode {
                 return jacs.ServiceClass.LightLevel
             case Tid.TID_SENSOR_ROTARY:
                 return jacs.ServiceClass.RotaryEncoder
-            // RGB_LED is now built-in, not Jacdac
-            // case Tid.TID_ACTUATOR_RGB_LED:
-            //     return jacs.ServiceClass.Led
+            // RGB_LED (47) is built-in NeoPixels
+            // RGB_LED_JACDAC (51) is external Jacdac device
+            case Tid.TID_ACTUATOR_RGB_LED_JACDAC:
+                return jacs.ServiceClass.Led
             case Tid.TID_ACTUATOR_SERVO_SET_ANGLE:
             case Tid.TID_ACTUATOR_SERVO_POWER:
                 return jacs.ServiceClass.Servo

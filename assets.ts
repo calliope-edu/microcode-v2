@@ -31,6 +31,7 @@ namespace microcode {
         if (name == Tid.TID_FILTER_ROTARY_LEFT) return icondb.kita_rotary_left
         if (name == Tid.TID_FILTER_ROTARY_RIGHT) return icondb.kita_rotary_right
         if (name == Tid.TID_ACTUATOR_RGB_LED) return icondb.rgbLed
+        if (name == Tid.TID_ACTUATOR_RGB_LED_JACDAC) return icondb.rgbLed
         if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_1)
             return icondb.tile_color_red
         if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_2)
