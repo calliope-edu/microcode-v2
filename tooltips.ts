@@ -54,7 +54,7 @@ namespace microcode {
         else if (id === "T44") res = "show image";
         else if (id === "T45") res = "radio send";
         else if (id === "T46") res = "radio set group";
-        else if (id === "T47") res = "LED";
+        else if (id === "T47") res = "RGB LEDs";
         else if (id === "T48") res = "set variable X";
         else if (id === "T49") res = "set variable Y";
         else if (id === "T50") res = "set variable Z";
@@ -168,6 +168,9 @@ namespace microcode {
         else if (id === "T211") res = "subtract";
         else if (id === "T212") res = "multiply";
         else if (id === "T213") res = "divide";
+        else if (id === "T214") res = "orange";
+        else if (id === "T215") res = "pink";
+        else if (id === "T216") res = "turquoise";
         else if (id === "T220") res = "equals";
         else if (id === "T221") res = "not equals";
         else if (id === "T222") res = "less than";

@@ -336,6 +336,12 @@ namespace microcode {
                     return neopixel.colors(NeoPixelColors.Yellow)
                 case Tid.TID_MODIFIER_RGB_LED_COLOR_6:
                     return neopixel.colors(NeoPixelColors.Black)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_7:
+                    return neopixel.colors(NeoPixelColors.Orange)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_8:
+                    return neopixel.rgb(255, 20, 147)  // Pink (Deep Pink)
+                case Tid.TID_MODIFIER_RGB_LED_COLOR_9:
+                    return neopixel.rgb(64, 224, 208)  // Turquoise
                 default:
                     return 0
             }

@@ -30,7 +30,7 @@ namespace microcode {
         if (name == Tid.TID_SENSOR_ROTARY) return icondb.kita_rotary
         if (name == Tid.TID_FILTER_ROTARY_LEFT) return icondb.kita_rotary_left
         if (name == Tid.TID_FILTER_ROTARY_RIGHT) return icondb.kita_rotary_right
-        if (name == Tid.TID_ACTUATOR_RGB_LED) return icondb.rgbLed
+        if (name == Tid.TID_ACTUATOR_RGB_LED) return icondb.rgbLedBuiltin
         if (name == Tid.TID_ACTUATOR_RGB_LED_JACDAC) return icondb.rgbLed
         if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_1)
             return icondb.tile_color_red
@@ -44,6 +44,12 @@ namespace microcode {
             return icondb.tile_color_yellow
         if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_6)
             return icondb.tile_color_black
+        if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_7)
+            return icondb.tile_color_orange
+        if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_8)
+            return icondb.tile_color_pink
+        if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_9)
+            return icondb.tile_color_turquoise
         if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_RAINBOW)
             return icondb.tile_rainbow
         if (name == Tid.TID_MODIFIER_RGB_LED_COLOR_SPARKLE)
@@ -1410,23 +1416,99 @@ namespace icondb {
     . . . . . . . . . . . . . . . .
     `
 
-    export const rgbLed = bmp`
+    export const tile_color_orange = bmp`
+    . . . . . . . . . . . . . . . . 
+    . . . . . 1 1 1 1 1 . . . . . . 
+    . . . 1 1 4 4 4 4 4 b b . . . . 
+    . . 1 4 4 4 4 4 4 4 4 4 b . . . 
+    . . 1 4 4 4 4 4 4 4 4 4 b . . . 
+    . 1 4 4 4 4 4 4 4 4 4 4 4 b . . 
+    . 1 4 4 4 4 4 4 4 4 4 4 4 b d . 
+    . 1 4 4 4 4 4 4 4 4 4 4 4 b d . 
+    . 1 4 4 4 4 4 4 4 4 4 4 4 b d . 
+    . 1 4 4 4 4 4 4 4 4 4 4 4 b d . 
+    . . b 4 4 4 4 4 4 4 4 4 b d d . 
+    . . b 4 4 4 4 4 4 4 4 4 b d . . 
+    . . . b b 4 4 4 4 4 b b d . . . 
+    . . . . . b b b b b d d . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+`
+
+    export const tile_color_pink = bmp`
+    . . . . . . . . . . . . . . . . 
+    . . . . . 1 1 1 1 1 . . . . . . 
+    . . . 1 1 3 3 3 3 3 b b . . . . 
+    . . 1 3 3 3 3 3 3 3 3 3 b . . . 
+    . . 1 3 3 3 3 3 3 3 3 3 b . . . 
+    . 1 3 3 3 3 3 3 3 3 3 3 3 b . . 
+    . 1 3 3 3 3 3 3 3 3 3 3 3 b d . 
+    . 1 3 3 3 3 3 3 3 3 3 3 3 b d . 
+    . 1 3 3 3 3 3 3 3 3 3 3 3 b d . 
+    . 1 3 3 3 3 3 3 3 3 3 3 3 b d . 
+    . . b 3 3 3 3 3 3 3 3 3 b d d . 
+    . . b 3 3 3 3 3 3 3 3 3 b d . . 
+    . . . b b 8 8 8 8 8 b b d . . . 
+    . . . . . b b b b b d d . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+`
+
+    export const tile_color_turquoise = bmp`
+    . . . . . . . . . . . . . . . . 
+    . . . . . 1 1 1 1 1 . . . . . . 
+    . . . 1 1 6 6 6 6 6 b b . . . . 
+    . . 1 6 6 6 6 6 6 6 6 6 b . . . 
+    . . 1 6 6 6 6 6 6 6 6 6 b . . . 
+    . 1 6 6 6 6 6 6 6 6 6 6 6 b . . 
+    . 1 6 6 6 6 6 6 6 6 6 6 6 b d . 
+    . 1 6 6 6 6 6 6 6 6 6 6 6 b d . 
+    . 1 6 6 6 6 6 6 6 6 6 6 6 b d . 
+    . 1 6 6 6 6 6 6 6 6 6 6 6 b d . 
+    . . b 6 6 6 6 6 6 6 6 6 b d d . 
+    . . b 6 6 6 6 6 6 6 6 6 b d . . 
+    . . . b b 6 6 6 6 6 b b d . . . 
+    . . . . . b b b b b d d . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+`
+
+    export const rgbLedBuiltin = bmp`
     . . . . f f f f f f f . . . . . 
     . . f f f 4 4 f 9 9 f f f . . . 
     . f 5 5 f 4 4 f 9 9 f b b f . . 
-    . f 5 5 f f f f f f f b b f d . 
-    f f f f f . . . . . f f f f f d 
-    f 4 4 f . . . . . . . f 7 7 f d 
-    f 4 4 f . . . . . . . f 7 7 f d 
-    f f f f . . . . . . . f f f f d 
-    f 2 2 f . . . . . . . f e e f d 
-    f 2 2 f . . . . . . . f e e f d 
-    f f f f . . . . . . . f f f f d 
-    b f 6 6 f f f f f f f c c f b d 
-    . f 6 6 f 8 8 f a a f c c 5 5 5 
-    . b f f f 8 8 f a a f f f 5 5 5 
-    . . b b f f f f f f f b b 5 5 4 
-    . . . . d b b b b b b d d 4 4 . 
+    . f 5 5 f f f f f f f b b f . . 
+    f f f f f . . . . . f f f f f . 
+    f 4 4 f . . . . . . . f 7 7 f . 
+    f 4 4 f . . . . . . . f 7 7 f . 
+    f f f f . . . . . . . f f f f . 
+    f 2 2 f . . . . . . . f e e f . 
+    f 2 2 f . . . . . . . f e e f . 
+    f f f f . . . . . . . f f f f . 
+    b f 6 6 f f f f f f f c c f b . 
+    . f 6 6 f 8 8 f a a f c c f . . 
+    . b f f f 8 8 f a a f f f . . . 
+    . . b b f f f f f f f b b . . . 
+    . . . . . b b b b b b . . . . . 
+`
+
+    export const rgbLed = bmp`
+    . . . . f f f f f f f . . 5 5 5
+    . . f f f 4 4 f 9 9 f f f 5 5 5
+    . f 5 5 f 4 4 f 9 9 f b b f 5 4
+    . f 5 5 f f f f f f f b b f 4 .
+    f f f f f . . . . . f f f f f . 
+    f 4 4 f . . . . . . . f 7 7 f . 
+    f 4 4 f . . . . . . . f 7 7 f . 
+    f f f f . . . . . . . f f f f . 
+    f 2 2 f . . . . . . . f e e f . 
+    f 2 2 f . . . . . . . f e e f . 
+    f f f f . . . . . . . f f f f . 
+    b f 6 6 f f f f f f f c c f b . 
+    . f 6 6 f 8 8 f a a f c c f . . 
+    . b f f f 8 8 f a a f f f . . . 
+    . . b b f f f f f f f b b . . . 
+    . . . . . b b b b b b . . . . . 
 `
 
     export const temp_warmer = bmp`

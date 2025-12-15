@@ -173,8 +173,11 @@ namespace microcode {
         TID_MODIFIER_RGB_LED_COLOR_6 = 187,
         TID_MODIFIER_RGB_LED_COLOR_RAINBOW = 188,
         TID_MODIFIER_RGB_LED_COLOR_SPARKLE = 189,
+        TID_MODIFIER_RGB_LED_COLOR_7 = 214,
+        TID_MODIFIER_RGB_LED_COLOR_8 = 215,
+        TID_MODIFIER_RGB_LED_COLOR_9 = 216,
         //
-        CAR_MODIFIER_BEGIN = 190,
+        CAR_MODIFIER_BEGIN = 193,
         TID_MODIFIER_CAR_FORWARD = 190,
         TID_MODIFIER_CAR_REVERSE = 191,
         TID_MODIFIER_CAR_TURN_LEFT = 192,
@@ -197,7 +200,7 @@ namespace microcode {
         TID_MODIFIER_LIGHT_READ = 206,
         TID_MODIFIER_MAGNET_READ = 207,
         TID_MODIFIER_MIC_READ = 208,
-        MODIFER_END = 208,
+        MODIFER_END = 216,
 
         TID_OPERATOR_START = 210,
         TID_OPERATOR_PLUS = 210,
@@ -352,8 +355,11 @@ namespace microcode {
 
     function isLedColor(tidEnum: Tid) {
         return (
-            Tid.TID_MODIFIER_RGB_LED_COLOR_1 <= tidEnum &&
-            tidEnum <= Tid.TID_MODIFIER_RGB_LED_COLOR_6
+            (Tid.TID_MODIFIER_RGB_LED_COLOR_1 <= tidEnum &&
+             tidEnum <= Tid.TID_MODIFIER_RGB_LED_COLOR_6) ||
+            tidEnum == Tid.TID_MODIFIER_RGB_LED_COLOR_7 ||
+            tidEnum == Tid.TID_MODIFIER_RGB_LED_COLOR_8 ||
+            tidEnum == Tid.TID_MODIFIER_RGB_LED_COLOR_9
         )
     }
 
@@ -960,6 +966,12 @@ namespace microcode {
                 return 0x2f2f00
             case Tid.TID_MODIFIER_RGB_LED_COLOR_6:
                 return 0x000000
+            case Tid.TID_MODIFIER_RGB_LED_COLOR_7:
+                return 0xff4500  // Orange
+            case Tid.TID_MODIFIER_RGB_LED_COLOR_8:
+                return 0xff1493  // Pink (Deep Pink)
+            case Tid.TID_MODIFIER_RGB_LED_COLOR_9:
+                return 0x40e0d0  // Turquoise
             case Tid.TID_MODIFIER_ICON_EDITOR:
                 return 400 // ms
             case Tid.TID_MODIFIER_MELODY_EDITOR:
